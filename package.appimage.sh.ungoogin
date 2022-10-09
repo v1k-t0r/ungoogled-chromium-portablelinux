@@ -2,7 +2,12 @@
 
 set -eux
 
+export APPIMAGE_EXTRACT_AND_RUN=1
+
 CURRENTDIR=$(dirname $(readlink -f $0))
+_root_dir=$(dirname $(readlink -f $0))
+_chromium_version=$(cat $_root_dir/ungoogled-chromium/chromium_version.txt)
+_ungoogled_revision=$(cat $_root_dir/ungoogled-chromium/revision.txt)
 
 pushd "$CURRENTDIR"
 
@@ -14,6 +19,6 @@ fi
 cp ungoogled-chromium.yml AppImages/ungoogled-chromium.yml
 cd AppImages
 ./pkg2appimage ungoogled-chromium.yml
-mv out/*.AppImage ../ungoogled-chromium_$ungoog{chromium_version}-$ungoog{release_revision}_linux.AppImage
+mv out/*.AppImage ../build/ungoogled-chromium_${_chromium_version}-${_ungoogled_revision}_linux.AppImage
 
 popd

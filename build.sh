@@ -23,24 +23,25 @@ cat "$_root_dir/flags.portable.gn" >> "$_src_dir/out/Default/args.gn"
 
 # Set commands or paths to LLVM-provided tools outside the script via 'export ...'
 # or before these lines
-export LLVM_VERSION=${LLVM_VERSION:=14}
+export LLVM_VERSION=${LLVM_VERSION:=15}
 export AR=${AR:=llvm-ar-${LLVM_VERSION}}
 export NM=${NM:=llvm-nm-${LLVM_VERSION}}
 export CC=${CC:=clang-${LLVM_VERSION}}
 export CXX=${CXX:=clang++-${LLVM_VERSION}}
 export LLVM_BIN=${LLVM_BIN:=/usr/lib/llvm-${LLVM_VERSION}/bin}
+export PATH="/usr/lib/llvm-${LLVM_VERSION}/bin:$PATH"
 # You may also set CFLAGS, CPPFLAGS, CXXFLAGS, and LDFLAGS
 # See build/toolchain/linux/unbundle/ in the Chromium source for more details.
 #
 # Hack to allow clang to find the default cfi_ignorelist.txt and LLVM tools
 # -B<prefix> defined here: https://clang.llvm.org/docs/ClangCommandLineReference.html
+# /usr/lib/llvm-15/lib/clang/15.0.2/share/
 _llvm_resource_dir=$("$CC" --print-resource-dir)
 export CXXFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
 export CPPFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
 export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
-
+ln -s ${_llvm_resource_dir}/share /usr/lib/clang/15.0.2/share
 cd "$_src_dir"
-
 ./tools/gn/bootstrap/bootstrap.py -o out/Default/gn --skip-generate-buildfiles
 ./out/Default/gn gen out/Default --fail-on-unused-args
 ninja -C out/Default chrome chrome_sandbox chromedriver

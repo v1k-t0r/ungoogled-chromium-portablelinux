@@ -9,7 +9,7 @@ _package_revision=$(cat $_root_dir/revision.txt)
 _tarprefix=ungoogled-chromium_$_chromium_version-$_ungoogled_revision.${_package_revision}_linux
 # Assume source tree is outside this script's directory
 _archive_output="$_root_dir/build/$_tarprefix.tar.xz"
-
+wget "https://chromium.googlesource.com/chromium/src/+/refs/tags/98.0.4758.102/chrome/tools/build/linux/FILES.cfg?format=TEXT" -O - | base64 -d > "$_root_dir/build/src/chrome/tools/build/linux/FILES.cfg"
 "$_root_dir/ungoogled-chromium/utils/filescfg.py" \
 	-c "$_root_dir/build/src/chrome/tools/build/linux/FILES.cfg" \
 	--build-outputs "$_root_dir/build/src/out/Default" \

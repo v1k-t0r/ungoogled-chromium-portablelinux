@@ -13,4 +13,7 @@ popd
 docker build --rm -f "Dockerfile-stage2" -t ug-chromium-builder-stage2:latest ./
 
 # start the browser build
-docker run -ti -v `pwd`/build:/repo/build ug-chromium-builder-stage2:latest bash -c "./build.sh && ./package.sh"
+docker run -ti -v `pwd`/build:/repo/build:z ug-chromium-builder-stage2:latest bash -c "./build.sh && ./package.sh"
+
+# appimage
+docker run -ti -v `pwd`/build:/repo/build:z ug-chromium-builder-stage2:latest bash -c "./package.appimage.sh.ungoogin"
