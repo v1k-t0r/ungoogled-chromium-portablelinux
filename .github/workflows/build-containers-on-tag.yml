@@ -31,25 +31,25 @@ jobs:
             ug-chromium-builder-stage1:${{ steps.gitref_tag.outputs.tag }}
             ug-chromium-builder-stage1:latest
 
-      - name: Build stage 2
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          build-contexts: |
-            ug-chromium-builder-stage1:latest=docker-image://ug-chromium-builder-stage1:latest
-          file: Dockerfile-stage2
-          load: true
-          tags: |
-            ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }}
-            ug-chromium-builder-stage2:latest
+      # - name: Build stage 2
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: .
+      #     build-contexts: |
+      #       ug-chromium-builder-stage1:latest=docker-image://ug-chromium-builder-stage1:latest
+      #     file: Dockerfile-stage2
+      #     load: true
+      #     tags: |
+      #       ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }}
+      #       ug-chromium-builder-stage2:latest
 
       - name: Browser build stage
         run: |
-          docker run -v `pwd`/build:/repo/build:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./build.sh && ./package.sh"
+          docker run -v `pwd`:/repo:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./build.sh && ./package.sh"
 
       - name: Build Appimage stage
         run: |
-          docker run -v `pwd`/build:/repo/build:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./package.appimage.sh.ungoogin"
+          docker run -v `pwd`:/repo:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./package.appimage.sh.ungoogin"
 
       - name: Upload release
         uses: ncipollo/release-action@v1
