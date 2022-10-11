@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: Dockerfile
+          file: Dockerfile-stage2
           tags: |
             ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }}
             ug-chromium-builder-stage2:latest
