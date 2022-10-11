@@ -36,7 +36,7 @@ jobs:
         with:
           context: .
           build-contexts: |
-            ug-chromium-builder-stage1=docker-image://ug-chromium-builder-stage1:latest
+            ug-chromium-builder-stage1:latest=docker-image://ug-chromium-builder-stage1:latest
           file: Dockerfile-stage2
           load: true
           tags: |
