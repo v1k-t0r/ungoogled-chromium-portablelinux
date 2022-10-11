@@ -35,12 +35,12 @@ export PATH="/usr/lib/llvm-${LLVM_VERSION}/bin:$PATH"
 #
 # Hack to allow clang to find the default cfi_ignorelist.txt and LLVM tools
 # -B<prefix> defined here: https://clang.llvm.org/docs/ClangCommandLineReference.html
-# /usr/lib/llvm-15/lib/clang/15.0.2/share/
 _llvm_resource_dir=$("$CC" --print-resource-dir)
+_clang_ver_short=$(basename ${_llvm_resource_dir})
 export CXXFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
 export CPPFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
-export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
-ln -s ${_llvm_resource_dir}/share /usr/lib/clang/15.0.2/share
+export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN} -Wno-deprecated-builtins"
+ln -s ${_llvm_resource_dir}/share /usr/lib/clang/${_clang_ver_short}/share
 cd "$_src_dir"
 ./tools/gn/bootstrap/bootstrap.py -o out/Default/gn --skip-generate-buildfiles
 ./out/Default/gn gen out/Default --fail-on-unused-args
