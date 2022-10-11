@@ -35,6 +35,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          build-contexts: |
+            ug-chromium-builder-stage1:latest=docker-image://ug-chromium-builder-stage1:latest
           file: Dockerfile-stage2
           load: true
           tags: |
