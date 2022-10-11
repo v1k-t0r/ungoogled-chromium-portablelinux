@@ -10,7 +10,10 @@ jobs:
   build-containers-on-tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
 
       - name: Get tag from actions context
         id: gitref_tag
