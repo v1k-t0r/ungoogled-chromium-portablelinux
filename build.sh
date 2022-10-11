@@ -38,8 +38,8 @@ export PATH="/usr/lib/llvm-${LLVM_VERSION}/bin:$PATH"
 _llvm_resource_dir=$("$CC" --print-resource-dir)
 _clang_ver_short=$(basename ${_llvm_resource_dir})
 export CXXFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
-export CPPFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
-export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN} -Wno-deprecated-builtins"
+export CPPFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN} -Wno-deprecated-builtins"
+export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
 ln -s ${_llvm_resource_dir}/share /usr/lib/clang/${_clang_ver_short}/share
 cd "$_src_dir"
 ./tools/gn/bootstrap/bootstrap.py -o out/Default/gn --skip-generate-buildfiles
