@@ -45,11 +45,11 @@ jobs:
 
       - name: Browser build stage
         run: |
-          docker run -v `pwd`:/repo:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./build.sh && ./package.sh"
+          docker run -v `pwd`:/repo:z ug-chromium-builder-stage1:${{ steps.gitref_tag.outputs.tag }} bash -c "./build.sh && ./package.sh"
 
       - name: Build Appimage stage
         run: |
-          docker run -v `pwd`:/repo:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./package.appimage.sh.ungoogin"
+          docker run -v `pwd`:/repo:z ug-chromium-builder-stage1:${{ steps.gitref_tag.outputs.tag }} bash -c "./package.appimage.sh.ungoogin"
 
       - name: Upload release
         uses: ncipollo/release-action@v1
