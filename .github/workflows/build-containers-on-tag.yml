@@ -46,3 +46,14 @@ jobs:
       - name: Build Appimage stage
         run: |
           docker run -v `pwd`/build:/repo/build:z ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }} bash -c "./package.appimage.sh.ungoogin"
+
+      - name: Upload release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: build/ungoogled-chromium-${{ steps.gitref_tag.outputs.tag }}-*.tar.xz
+          artifactContentType: application/gzip
+          omitBodyDuringUpdate: false
+          omitName: true
+          omitNameDuringUpdate: true
+          tag: ${{ steps.gitref_tag.outputs.tag }}
