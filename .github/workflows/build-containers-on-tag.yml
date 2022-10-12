@@ -21,8 +21,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          endpoint: "unix://$XDG_RUNTIME_DIR/podman/podman.sock"
 
       - name: Build stage 1
         uses: docker/build-push-action@v3
