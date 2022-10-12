@@ -1,6 +1,8 @@
 ---
 name: Build Tagged Image
 
+runs-on: self-hosted
+
 on:  # yamllint disable-line rule:truthy
   push:
     tags:
