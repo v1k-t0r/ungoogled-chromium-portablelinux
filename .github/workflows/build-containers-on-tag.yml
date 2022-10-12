@@ -34,18 +34,6 @@ jobs:
             ug-chromium-builder-stage1:${{ steps.gitref_tag.outputs.tag }}
             ug-chromium-builder-stage1:latest
 
-      # - name: Build stage 2
-      #   uses: docker/build-push-action@v3
-      #   with:
-      #     context: .
-      #     build-contexts: |
-      #       ug-chromium-builder-stage1:latest=docker-image://ug-chromium-builder-stage1:latest
-      #     file: Dockerfile-stage2
-      #     load: true
-      #     tags: |
-      #       ug-chromium-builder-stage2:${{ steps.gitref_tag.outputs.tag }}
-      #       ug-chromium-builder-stage2:latest
-
       - name: Browser build stage
         run: |
           docker run -v `pwd`:/repo:z ug-chromium-builder-stage1:${{ steps.gitref_tag.outputs.tag }} bash -c "./build.sh && ./package.sh"
@@ -58,7 +46,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: build/ungoogled-chromium-${{ steps.gitref_tag.outputs.tag }}-*.tar.xz
+          artifacts: "build/ungoogled-chromium*"
           artifactContentType: application/gzip
           omitBodyDuringUpdate: false
           omitName: true
