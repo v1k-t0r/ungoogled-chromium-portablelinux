@@ -8,7 +8,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   build-containers-on-tag:
-    timeout-minutes: 600
+    timeout-minutes: 900
     runs-on: self-hosted
     steps:
       - name: cleanup #https://github.com/actions/checkout/issues/211
