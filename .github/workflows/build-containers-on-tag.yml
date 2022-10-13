@@ -11,6 +11,9 @@ jobs:
     timeout-minutes: 600
     runs-on: self-hosted
     steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Checkout submodules
