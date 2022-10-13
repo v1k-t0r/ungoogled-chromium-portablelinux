@@ -8,6 +8,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   build-containers-on-tag:
+    timeout-minutes: 600
     runs-on: self-hosted
     steps:
       - name: Checkout repository
