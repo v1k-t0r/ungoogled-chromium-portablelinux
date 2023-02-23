@@ -12,15 +12,15 @@ RUN apt-get -y --no-install-recommends install git debhelper python python3 pkg-
 WORKDIR /root
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN add-apt-repository "deb http://apt.llvm.org/bullseye llvm-toolchain-bullseye-15 main"
+RUN add-apt-repository "deb http://apt.llvm.org/bullseye llvm-toolchain-bullseye main"
 RUN apt-get update
 
-RUN apt-get install -y libllvm-15-ocaml-dev libllvm15 llvm-15 llvm-15-dev llvm-15-doc llvm-15-examples llvm-15-runtime clang-15 clang-tools-15 clang-15-doc libclang-common-15-dev libclang-15-dev libclang1-15 clang-format-15 clangd-15 libfuzzer-15-dev lldb-15 lld-15 libc++-15-dev libc++abi-15-dev libomp-15-dev libclc-15-dev libunwind-15-dev
+RUN apt-get install -y libllvm-16-ocaml-dev libllvm16 llvm-16 llvm-16-dev llvm-16-doc llvm-16-examples llvm-16-runtime clang-16 clang-tools-16 clang-16-doc libclang-common-16-dev libclang-16-dev libclang1-16 clang-format-16 clangd-16 libfuzzer-16-dev lldb-16 lld-16 libc++-16-dev libc++abi-16-dev libomp-16-dev libunwind-16-dev
 
-RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-15 800
-RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-15 800
-RUN update-alternatives --install /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-15 800
-RUN update-alternatives --install /usr/bin/llvm-nm llvm-nm /usr/bin/llvm-nm-15 800
+RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-16 800
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-16 800
+RUN update-alternatives --install /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-16 800
+RUN update-alternatives --install /usr/bin/llvm-nm llvm-nm /usr/bin/llvm-nm-16 800
 
 RUN apt-get install -y fuse libfuse2
 
