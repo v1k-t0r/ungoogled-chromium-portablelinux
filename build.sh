@@ -44,6 +44,10 @@ export CPPFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN} -Wno-depreca
 export CFLAGS+="-resource-dir=${_llvm_resource_dir} -B${LLVM_BIN}"
 ln -s ${_llvm_resource_dir}/share /usr/lib/clang/${_clang_ver_short}/share
 cd "$_src_dir"
+
+# dirty hack to bypass the check for a certain llvm package version introduced in chromium 107.0.5304.*)
+sed -i 's/ReadStampFile(STAMP_FILE).partition\(.*\)\[0\]/PACKAGE_VERSION/' ./tools/clang/scripts/update.py
+
 ./tools/gn/bootstrap/bootstrap.py -o out/Default/gn --skip-generate-buildfiles
 ./out/Default/gn gen out/Default --fail-on-unused-args
 ninja -C out/Default chrome chrome_sandbox chromedriver
