@@ -1,5 +1,7 @@
 #!/bin/bash -eux
 
+# docker run --rm -it -v ./:/repo ug-chromium-builder ./build.sh
+
 # Simple build script for Portable Linux
 # NOTE: This script will delete all build intermediates every time it runs. Proceed with caution.
 
@@ -23,7 +25,7 @@ cat "$_root_dir/flags.portable.gn" >> "$_src_dir/out/Default/args.gn"
 
 # Set commands or paths to LLVM-provided tools outside the script via 'export ...'
 # or before these lines
-export LLVM_VERSION=${LLVM_VERSION:=15}
+export LLVM_VERSION=${LLVM_VERSION:=16}
 export AR=${AR:=llvm-ar-${LLVM_VERSION}}
 export NM=${NM:=llvm-nm-${LLVM_VERSION}}
 export CC=${CC:=clang-${LLVM_VERSION}}
