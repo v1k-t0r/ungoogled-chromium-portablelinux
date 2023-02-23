@@ -12,7 +12,7 @@ RUN apt-get -y --no-install-recommends install git debhelper python python3 pkg-
 WORKDIR /root
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN add-apt-repository "deb http://apt.llvm.org/bullseye llvm-toolchain-bullseye main"
+RUN add-apt-repository "deb http://apt.llvm.org/bullseye llvm-toolchain-bullseye-16 main"
 RUN apt-get update
 
 RUN apt-get install -y libllvm-16-ocaml-dev libllvm16 llvm-16 llvm-16-dev llvm-16-doc llvm-16-examples llvm-16-runtime clang-16 clang-tools-16 clang-16-doc libclang-common-16-dev libclang-16-dev libclang1-16 clang-format-16 clangd-16 libfuzzer-16-dev lldb-16 lld-16 libc++-16-dev libc++abi-16-dev libomp-16-dev libunwind-16-dev
