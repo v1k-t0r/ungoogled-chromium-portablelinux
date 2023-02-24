@@ -28,7 +28,7 @@ RUN wget -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add
 RUN add-apt-repository "deb https://deb.nodesource.com/node_14.x bullseye main"
 RUN apt-get update
 
-RUN apt-get install -y nodejs node-typescript uglifyjs.terser qtbase5-dev
+RUN apt-get install -y nodejs node-typescript uglifyjs.terser qtbase5-dev python-is-python3
 
 RUN mkdir /repo
 WORKDIR /repo
